@@ -10,7 +10,7 @@ public class MyFramework : MonoBehaviour
     [SerializeField]
     string textureFileName; // Resource - Texture File Name
 
-    List<BuildingReneder> buildingRenderObjects = new List<BuildingReneder>();      // 각 건물 오브젝트 관리
+    List<BuildingReneder> buildingRenderers = new List<BuildingReneder>();      // 각 건물 오브젝트 관리
     Dictionary<string, GameObject> buildingObjectDic = new Dictionary<string, GameObject>();  // 검색용 Dictionary
     GameObject buildObjecs;     // 건물 오브젝트들의 상위 오브젝트 인스턴스
 
@@ -29,9 +29,9 @@ public class MyFramework : MonoBehaviour
         if (isInitialized)  // 초기화가 끝났다면 매프레임 마다
         {
             // 각 구성된 건물 렌더 오브젝트 OnUpdate 호출
-            foreach (var buildingRenderObject in buildingRenderObjects)
+            foreach (var buildingRenderer in buildingRenderers)
             {
-                buildingRenderObject.OnUpdate();
+                buildingRenderer.OnUpdate();
             }
         }
     }
@@ -104,8 +104,11 @@ public class MyFramework : MonoBehaviour
             buildingObject.AddComponent<MeshFilter>();
             buildingObject.AddComponent<MeshRenderer>();
             buildingRenderer.SetMeshData(buildingDatas[i], mat);
-            buildingRenderObjects.Add(buildingRenderer);
+            buildingRenderers.Add(buildingRenderer);
             buildingObjectDic.Add(objectName, buildingObject);
+
+            // 동별 건물 하나 구성후 한 프레임 대기 (생략가능)
+            yield return new WaitForEndOfFrame();
         }
 
         yield break;

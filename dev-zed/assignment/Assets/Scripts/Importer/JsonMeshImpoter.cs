@@ -68,6 +68,7 @@ public class JsonMeshImpoter
                     buildingData.AddVertices(floats);
                 }
             }
+
             buildingData.GenerateMesh();
             buildingData.SetMetaData(buildingInfos[i].meta);
             buildingDatas.Add(buildingData);

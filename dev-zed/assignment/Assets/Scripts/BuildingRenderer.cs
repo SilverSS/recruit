@@ -15,6 +15,7 @@ public class BuildingReneder : MonoBehaviour
 
     public void SetMeshData(BuildingData meshData, Material mat)
     {
+        // Mesh Renderer에 
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
         _meshFilter = gameObject.GetComponent<MeshFilter>();
 
