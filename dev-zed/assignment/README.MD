@@ -125,3 +125,20 @@ MyFramework.cs 파일에만 유니티 라이프 사이클 함수를 사용합니
 
 # 문제 해결 방법 (자유롭게 작성)
 
+각 파일과 코드 항목은 로직별로 세부 주석을 달았습니다.
+먼저 구현 방법을 간략히 다음과 같이 정리 하겠습니다. 
+
+JsonMeshImpoter.cs : 샘플 데이터를 Json Deserialize하는 static Utility클래스 입니다.
+BuildingData.cs : 샘플 데이터 로드를 통해 건물 Mesh 정보 및 Meta 데이터를 구성하는 클래스 입니다.
+BuildingRenderer.cs : BuildingData 의 메쉬 정보를 이용헤 Unity3D의 Renderer Component를 구성하는 MonoBehaviour 클래스 입니다.
+MyFramework.cs :
+ Start() : 초기화 함수 OnInitilize()를 호출, 비동기함수인 Initialize 를 호출한다. 리소스를(샘플데이터, 텍스쳐)로딩 후, GenerateBuildingObjects를 통해 실제 Scene에 그려질 오브젝트를 구성한다.
+ Update() : Initilize 과정이 끝나고 isInitialized = true 상태가 되면 구성된 buildingRenderers (BuildingRenderer.OnUpdate()를 차례로 실행
+ 
+ 
+ 문제를 해결하는데 주어진 정보 만으로는 예시에 가까운 형태를 정확히 매핑하기는 힘든 상황이었습니다. 
+ 정확하게 방향에 따른 매핑을 하려면 몇가지 조건들이 더 필요했는데, 건물 데이터 별로 기준 Axis가 하나씩만 있어도 1번조건과 유사하게 정점 노멀 방향 체크를 통해 매핑을 했다면 조금더 예시 이미지에 가깝게 결과를 낼 수 있을 것이라 판단되었습니다.
+ 주어진 정보 만으로 조금 더 예시와 가깝게 보여질 수 있도록 (문제조건 외) 구현한 로직이 코드 안에 주석 처리 되어있고 설명도 포함하였습니다.
+ 
+ 
+ 
