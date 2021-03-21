@@ -128,6 +128,8 @@ MyFramework.cs 파일에만 유니티 라이프 사이클 함수를 사용합니
 각 파일과 코드 항목은 로직별로 세부 주석을 달았습니다.
 먼저 구현 방법을 간략히 다음과 같이 정리 하겠습니다. 
 
+
+
 JsonMeshImpoter.cs : 샘플 데이터를 Json Deserialize하는 static Utility클래스 입니다.
 
 BuildingData.cs : 샘플 데이터 로드를 통해 건물 Mesh 정보 및 Meta 데이터를 구성하는 클래스 입니다.
@@ -137,6 +139,8 @@ BuildingRenderer.cs : BuildingData 의 메쉬 정보를 이용헤 Unity3D의 Ren
 MyFramework.cs :
  Start() - 초기화 함수 OnInitilize()를 호출, 비동기함수인 Initialize 를 호출한다. 리소스를(샘플데이터, 텍스쳐)로딩 후, GenerateBuildingObjects를 통해 실제 Scene에 그려질 오브젝트를 구성한다.
  Update() - Initilize 과정이 끝나고 isInitialized = true 상태가 되면 구성된 buildingRenderers (BuildingRenderer.OnUpdate()를 차례로 실행
+ 
+ 
  
  
  문제를 해결하는데 주어진 정보 만으로는 예시에 가까운 형태를 정확히 매핑하기는 힘든 상황이었습니다. 
