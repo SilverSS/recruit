@@ -10,7 +10,7 @@ public class MyFramework : MonoBehaviour
     [SerializeField]
     string textureFileName; // Resource - Texture File Name
 
-    List<BuildingReneder> buildingRenderers = new List<BuildingReneder>();      // 각 건물 오브젝트 관리
+    List<BuildingReneder> buildingRenderers = new List<BuildingReneder>();      // 각 건물 오브젝트 렌더링 관련
     Dictionary<string, GameObject> buildingObjectDic = new Dictionary<string, GameObject>();  // 검색용 Dictionary
     GameObject buildObjecs;     // 건물 오브젝트들의 상위 오브젝트 인스턴스
 
@@ -44,12 +44,12 @@ public class MyFramework : MonoBehaviour
 
     IEnumerator Initialize()
     {
+        // Json text asset 로드
         ResourceRequest request = Resources.LoadAsync<TextAsset>("JsonTexts/" + jsonFileName);
         while (request.isDone == false)
         {
             yield return null;
         }
-
         TextAsset asset = request.asset as TextAsset;
         if (asset == null)
         {
@@ -57,12 +57,12 @@ public class MyFramework : MonoBehaviour
             yield break;
         }
 
+        // Texture 로드
         request = Resources.LoadAsync<Texture2D>("Textures/" + textureFileName);
         while (request.isDone == false)
         {
             yield return null;
         }
-
         Texture2D texture = request.asset as Texture2D;
         if (asset == null)
         {
@@ -70,9 +70,21 @@ public class MyFramework : MonoBehaviour
             yield break;
         }
 
+        // 바닥 Plane 오브젝트 생성
+        yield return GenerateGround();
+
+        // Scene에 건물 오브젝트 구성
         yield return GenerateBuildingObjects(asset, texture);
 
         isInitialized = true;
+        yield break;
+    }
+
+    IEnumerator GenerateGround()
+    {
+        GameObject groundObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        groundObject.transform.position = Vector3.zero;
+        groundObject.transform.localScale = new Vector3(200f, 0f, 200f);
         yield break;
     }
 
